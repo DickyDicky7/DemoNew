@@ -34,7 +34,18 @@ jobs:
           echo "export/android/debug_keystore_user=\"androiddebugkey\"     " >> editor_settings-3.tres
           echo "export/android/debug_keystore_pass=\"android\"             " >> editor_settings-3.tres
           cp ./editor_settings-3.tres ~/.config/godot/
-
+          cd ${{ github.workspace }}
+          touch export_credentials.cfg
+          echo "[preset.0]                " >> export_credentials.cfg
+          echo "script_encryption_key=\"\"" >> export_credentials.cfg
+          echo "[preset.0.options]        " >> export_credentials.cfg
+          echo "keystore/debug=\"~/.android/debug.keystore\"" >> export_credentials.cfg
+          echo "keystore/debug_user    =\"androiddebugkey\"" >> export_credentials.cfg
+          echo "keystore/debug_password=\"android\"        " >> export_credentials.cfg
+          echo "keystore/release         =\"\"" >> export_credentials.cfg
+          echo "keystore/release_user    =\"\"" >> export_credentials.cfg
+          echo "keystore/release_password=\"\"" >> export_credentials.cfg
+          
       - name: export game
         id  : export
         uses: firebelley/godot-export@v5.2.1

@@ -4,16 +4,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoNew", "DemoNew.csproj",
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	Debug|Any CPU = Debug|Any CPU
+	      Debug|Any CPU =       Debug|Any CPU
 	ExportDebug|Any CPU = ExportDebug|Any CPU
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6EB22669-9FE2-4C52-B979-30F40824202F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6EB22669-9FE2-4C52-B979-30F40824202F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB22669-9FE2-4C52-B979-30F40824202F}.Debug|Any CPU.Build.0   = Debug|Any CPU
 		{6EB22669-9FE2-4C52-B979-30F40824202F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{6EB22669-9FE2-4C52-B979-30F40824202F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{6EB22669-9FE2-4C52-B979-30F40824202F}.ExportDebug|Any CPU.Build.0   = ExportDebug|Any CPU
 		{6EB22669-9FE2-4C52-B979-30F40824202F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{6EB22669-9FE2-4C52-B979-30F40824202F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{6EB22669-9FE2-4C52-B979-30F40824202F}.ExportRelease|Any CPU.Build.0   = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

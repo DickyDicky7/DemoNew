@@ -1,5 +1,1 @@
-<Project Sdk="Godot.NET.Sdk/3.3.0">
-  <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-  </PropertyGroup>
-</Project>
+﻿<Project Sdk="Godot.NET.Sdk/3.3.0"><PropertyGroup><TargetFramework>net472</TargetFramework><LangVersion>12.0</LangVersion></PropertyGroup></Project>

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+path="res://.import/Preview.png-70ed3f8d8e1558427b4c77b3193739c2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex" ]
+source_file="res://assets/Realistic Car Pack - Nov 2018/Preview.png"
+dest_files=[ "res://.import/Preview.png-70ed3f8d8e1558427b4c77b3193739c2.stex" ]
 
 [params]
 

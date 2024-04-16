@@ -1,13 +1,42 @@
 [gd_resource type="ArrayMesh" load_steps=9 format=2]
 
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/WhiteLights.material" type="Material" id=1]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/Black.material" type="Material" id=2]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/BlueLights.material" type="Material" id=3]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/TailLights.material" type="Material" id=4]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/White.material" type="Material" id=5]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/Windows.material" type="Material" id=6]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/Grey.material" type="Material" id=7]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/Headlights.material" type="Material" id=8]
+[sub_resource type="SpatialMaterial" id=1]
+resource_name = "White"
+params_cull_mode = 2
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_name = "Windows"
+albedo_color = Color( 0.501961, 0.501961, 0.501961, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_name = "Grey"
+params_cull_mode = 2
+albedo_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+resource_name = "Headlights"
+params_cull_mode = 2
+albedo_color = Color( 0.8, 0.4, 0.101961, 1 )
+
+[sub_resource type="SpatialMaterial" id=5]
+resource_name = "Black"
+params_cull_mode = 2
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+resource_name = "TailLights"
+params_cull_mode = 2
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+resource_name = "WhiteLights"
+params_cull_mode = 2
+albedo_color = Color( 0.8, 0.8, 0.8, 1 )
+
+[sub_resource type="SpatialMaterial" id=8]
+resource_name = "BlueLights"
+params_cull_mode = 2
+albedo_color = Color( 0, 0, 1, 1 )
 
 [resource]
 blend_shape_mode = 0
@@ -18,7 +47,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 432,
-"material": ExtResource( 5 ),
+"material": SubResource( 1 ),
 "name": "White",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -31,7 +60,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 186,
-"material": ExtResource( 6 ),
+"material": SubResource( 2 ),
 "name": "Windows",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -44,7 +73,7 @@ surfaces/2 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 48,
-"material": ExtResource( 7 ),
+"material": SubResource( 3 ),
 "name": "Grey",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -57,7 +86,7 @@ surfaces/3 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 30,
-"material": ExtResource( 8 ),
+"material": SubResource( 4 ),
 "name": "Headlights",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -70,7 +99,7 @@ surfaces/4 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 3804,
-"material": ExtResource( 2 ),
+"material": SubResource( 5 ),
 "name": "Black",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -83,7 +112,7 @@ surfaces/5 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 78,
-"material": ExtResource( 4 ),
+"material": SubResource( 6 ),
 "name": "TailLights",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -96,7 +125,7 @@ surfaces/6 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 36,
-"material": ExtResource( 1 ),
+"material": SubResource( 7 ),
 "name": "WhiteLights",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -109,7 +138,7 @@ surfaces/7 = {
 "blend_shape_data": [  ],
 "format": 2194699,
 "index_count": 42,
-"material": ExtResource( 3 ),
+"material": SubResource( 8 ),
 "name": "BlueLights",
 "primitive": 4,
 "skeleton_aabb": [  ],

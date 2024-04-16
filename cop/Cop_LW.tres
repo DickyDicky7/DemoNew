@@ -1,7 +1,14 @@
 [gd_resource type="ArrayMesh" load_steps=3 format=2]
 
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/Black.material" type="Material" id=1]
-[ext_resource path="res://assets/Realistic Car Pack - Nov 2018/FBX/Grey.material" type="Material" id=2]
+[sub_resource type="SpatialMaterial" id=1]
+resource_name = "Grey"
+params_cull_mode = 2
+albedo_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_name = "Black"
+params_cull_mode = 2
+albedo_color = Color( 0, 0, 0, 1 )
 
 [resource]
 blend_shape_mode = 0
@@ -12,7 +19,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194691,
 "index_count": 846,
-"material": ExtResource( 2 ),
+"material": SubResource( 1 ),
 "name": "Grey",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -25,7 +32,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 2194691,
 "index_count": 414,
-"material": ExtResource( 1 ),
+"material": SubResource( 2 ),
 "name": "Black",
 "primitive": 4,
 "skeleton_aabb": [  ],

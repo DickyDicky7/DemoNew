@@ -3,14 +3,12 @@
 [sub_resource type="SpatialMaterial" id=7]
 resource_name = "Grey"
 params_cull_mode = 2
-albedo_color = Color( 0.201556, 0.201556, 0.201556, 1 )
-metallic = 1.0
+albedo_color = Color( 0.2, 0.2, 0.2, 1 )
 
 [sub_resource type="SpatialMaterial" id=8]
 resource_name = "Black"
 params_cull_mode = 2
-albedo_color = Color( 0.0137021, 0.0137021, 0.0137021, 1 )
-metallic = 1.0
+albedo_color = Color( 0, 0, 0, 1 )
 
 [resource]
 blend_shape_mode = 0

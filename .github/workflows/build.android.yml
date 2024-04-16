@@ -45,6 +45,13 @@ jobs:
           echo "keystore/release         =\"\"" >> export_credentials.cfg
           echo "keystore/release_user    =\"\"" >> export_credentials.cfg
           echo "keystore/release_password=\"\"" >> export_credentials.cfg
+          echo "keystore/debug=\"~/.android/debug.keystore\"" >> export_presets.cfg
+          echo "keystore/debug_user    =\"androiddebugkey\"" >> export_presets.cfg
+          echo "keystore/debug_password=\"android\"        " >> export_presets.cfg
+          echo "keystore/release         =\"\"" >> export_presets.cfg
+          echo "keystore/release_user    =\"\"" >> export_presets.cfg
+          echo "keystore/release_password=\"\"" >> export_presets.cfg
+          sed "2 i script_encryption_key=\"\"" export_presets.cfg
           
       - name: export game
         id  : export

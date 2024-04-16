@@ -1,0 +1,63 @@
+name: ANDROID BUILD
+
+on  :
+  workflow_dispatch
+
+jobs:
+  export-game:
+    runs-on  : ubuntu-latest
+    permissions:
+       write-all
+    name :    Export Game
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4.1.1
+        
+      - name: setup java jdk
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      
+      - name: setup android sdk tools
+        uses: android-actions/setup-android@v3.2.1
+
+      - run : |
+          keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
+          mv ./debug.keystore ~/.android
+          mkdir -p ~/.config/godot
+          touch editor_settings-3.tres
+          echo "[gd_resource type=\"EditorSettings\" format=2]" >> editor_settings-3.tres
+          echo "[resource]                                    " >> editor_settings-3.tres
+          echo "export/android/android_sdk_path=\"/usr/local/lib/android/sdk\"" >> editor_settings-3.tres
+          echo "export/android/debug_keystore=\"~/.android/debug.keystore\"" >> editor_settings-3.tres
+          echo "export/android/debug_keystore_user=\"androiddebugkey\"     " >> editor_settings-3.tres
+          echo "export/android/debug_keystore_pass=\"android\"             " >> editor_settings-3.tres
+          cp ./editor_settings-3.tres ~/.config/godot/
+
+      - name: export game
+        id  : export
+        uses: firebelley/godot-export@v5.2.1
+        with:
+          godot_executable_download_url      : https://downloads.tuxfamily.org/godotengine/3.6/beta4/Godot_v3.6-beta4_linux_headless.64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.6/beta4/Godot_v3.6-beta4_export_templates.tpz
+          relative_project_path: ./
+          use_godot_3   : true
+          export_debug  : true
+          verbose       : true
+          archive_output: true
+          
+          
+      - name: create release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          tag  : ${{ github.ref_name      }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+
+
+
+          
+          
+          

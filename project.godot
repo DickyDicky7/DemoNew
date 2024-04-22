@@ -8,11 +8,55 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "RoadContainer",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_container.gd"
+}, {
+"base": "Spatial",
+"class": "RoadIntersection",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_intersection.gd"
+}, {
+"base": "Path",
+"class": "RoadLane",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_lane.gd"
+}, {
+"base": "Spatial",
+"class": "RoadManager",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_manager.gd"
+}, {
+"base": "Spatial",
+"class": "RoadPoint",
+"language": "GDScript",
+"path": "res://addons/road-generator/nodes/road_point.gd"
+} ]
+_global_script_class_icons={
+"RoadContainer": "res://addons/road-generator/resources/road_container.png",
+"RoadIntersection": "res://addons/road-generator/resources/road_intersection.png",
+"RoadLane": "res://addons/road-generator/resources/road_lane.png",
+"RoadManager": "res://addons/road-generator/resources/road_manager.png",
+"RoadPoint": "res://addons/road-generator/resources/road_point.png"
+}
+
 [application]
 
 config/name="DemoNew"
 run/main_scene="res://main/Main.tscn"
 config/icon="res://assets/icon_.png"
+
+[display]
+
+window/size/width=600
+window/size/height=1024
+window/handheld/orientation="portrait"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/road-generator/plugin.cfg" )
 
 [gui]
 

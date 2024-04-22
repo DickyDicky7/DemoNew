@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Level.gd" type="Script" id=1]
+[ext_resource path="res://RoadPointVisibilityNotifier.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/road-generator/nodes/road_manager.gd" type="Script" id=4]
+[ext_resource path="res://addons/road-generator/nodes/road_container.gd" type="Script" id=5]
+[ext_resource path="res://addons/road-generator/resources/road_texture.material" type="Material" id=6]
+[ext_resource path="res://addons/road-generator/nodes/road_point.gd" type="Script" id=7]
+
+[node name="Level" type="Spatial"]
+script = ExtResource( 1 )
+RoadPointVisibilityNotifier = ExtResource( 2 )
+
+[node name="RoadManager" type="Spatial" parent="."]
+script = ExtResource( 4 )
+
+[node name="Road_001" type="Spatial" parent="RoadManager"]
+script = ExtResource( 5 )
+material_resource = ExtResource( 6 )
+use_lowpoly_preview = true
+edge_containers = [ "", "" ]
+edge_rp_targets = [ "", "" ]
+edge_rp_target_dirs = [ -1, -1 ]
+edge_rp_locals = [ NodePath("RP_001"), NodePath("RP_012") ]
+edge_rp_local_dirs = [ 1, 0 ]
+
+[node name="RP_001" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+next_pt_init = NodePath("../RP_002")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_002" type="Spatial" parent="RoadManager/Road_001"]
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_001")
+next_pt_init = NodePath("../RP_003")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_003" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_002")
+next_pt_init = NodePath("../RP_004")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_004" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_003")
+next_pt_init = NodePath("../RP_005")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_005" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_004")
+next_pt_init = NodePath("../RP_006")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_006" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 200 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_005")
+next_pt_init = NodePath("../RP_007")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_007" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 250 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_006")
+next_pt_init = NodePath("../RP_008")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_008" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 300 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_007")
+next_pt_init = NodePath("../RP_009")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_009" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 350 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_008")
+next_pt_init = NodePath("../RP_010")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_010" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 400 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_009")
+next_pt_init = NodePath("../RP_011")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="RP_011" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 450 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_010")
+next_pt_init = NodePath("../RP_012")
+
+[node name="RP_012" type="Spatial" parent="RoadManager/Road_001"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 500 )
+script = ExtResource( 7 )
+traffic_dir = [ 2, 2, 1, 1 ]
+lanes = [ 2, 4, 4, 2 ]
+prior_pt_init = NodePath("../RP_011")
+prior_mag = 16.0
+next_mag = 16.0
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 10, -20 )

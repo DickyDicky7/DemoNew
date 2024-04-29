@@ -1,13 +1,25 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://main/Main.cs" type="Script" id=1]
 [ext_resource path="res://cop/Cop.tscn" type="PackedScene" id=2]
-[ext_resource path="res://main/CameraPivot.cs" type="Script" id=3]
+[ext_resource path="res://main/PivotFPS.cs" type="Script" id=3]
 [ext_resource path="res://Level.tscn" type="PackedScene" id=4]
 [ext_resource path="res://main/Text.cs" type="Script" id=5]
 [ext_resource path="res://assets/Montreal-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/dithers/bayer16tile02.png" type="Texture" id=7]
-[ext_resource path="res://assets/dithers/palette_mist_gameboy.png" type="Texture" id=8]
+[ext_resource path="res://assets/dithers/palette_kirokaze_gameboy.png" type="Texture" id=8]
+[ext_resource path="res://main/CustomViewportContainer.gd" type="Script" id=9]
+[ext_resource path="res://assets/dithers/palette_moonlight.png" type="Texture" id=10]
+[ext_resource path="res://assets/dithers/palette_mist_gameboy.png" type="Texture" id=11]
+[ext_resource path="res://assets/dithers/palette_eeveeeeee.png" type="Texture" id=12]
+[ext_resource path="res://assets/dithers/palette_risingsun.png" type="Texture" id=13]
+[ext_resource path="res://assets/dithers/palette_icecream_gameboy.png" type="Texture" id=14]
+[ext_resource path="res://assets/dithers/palette_$$$_ayy4.png" type="Texture" id=15]
+[ext_resource path="res://main/PivotShoulder.gd" type="Script" id=16]
+[ext_resource path="res://assets/dithers/palette_blk_aqu4.png" type="Texture" id=17]
+[ext_resource path="res://assets/dithers/palette_lava_gameboy.png" type="Texture" id=18]
+[ext_resource path="res://assets/dithers/palette_hollouuuu.png" type="Texture" id=19]
+[ext_resource path="res://assets/dithers/palette_monoooooo.png" type="Texture" id=20]
 
 [sub_resource type="Shader" id=27]
 code = "shader_type canvas_item;
@@ -25,35 +37,35 @@ void fragment()
 	vec2 screen_size = vec2(textureSize(TEXTURE, 0)) / float(u_dither_sizee);
 	vec2 screen_sample_uv = floor(UV * screen_size) / screen_size;
 	vec3 screen_colo =      texture    (TEXTURE,      screen_sample_uv).rgb ;
-	
-	
+
+
 	float lum = (screen_colo.r * 0.299)
 	          + (screen_colo.g * 0.587)
 			  + (screen_colo.b * 0.114);
-	
-	
+
+
 	float   contrast = u_contrast;
 	lum = (lum - 0.5 + u_offsettt) * contrast + 0.5;
 	lum = clamp(lum, 0.0, 1.0);
-	
-	
+
+
 	float bits = float(u_bitttt_depth)   ;
 	      lum  = floor(lum * bits) / bits;
-	
-	
+
+
 	ivec2 col_size  = textureSize(u_colors_tex, 0);
 	      col_size /= col_size.y;
-	
+
 	float col_x          = float(col_size.x) - 1.0;
 	float col_texel_size = 1.0 / col_x            ;
-	
+
 	lum = max(lum - 0.00001, 0.0);
 	float lum_lower =  floor(lum * col_x)        * col_texel_size;
 	float lum_upper = (floor(lum * col_x) + 1.0) * col_texel_size;
 	float lum_scaled =       lum * col_x  -
 	                   floor(lum * col_x) ;
-	
-	
+
+
 	ivec2    noise_size = textureSize(u_dither_tex, 0);
 	vec2 inv_noise_size = vec2
 	(1.0 / float(noise_size.x) ,
@@ -63,13 +75,13 @@ void fragment()
 	                           float(screen_size.y));
 	float threshold     = texture    (u_dither_tex,
 	      noise_uv).r;
-	
-	
+
+
 	      threshold     =
 		  threshold * 0.99
 		            + 0.005;
-	
-	
+
+
 	float ramp_val = lum_scaled
 	                 <threshold
 				   ? 0.0f
@@ -78,7 +90,7 @@ void fragment()
 	                             lum_upper,
 								ramp_val  );
 	vec3  final_col        = texture(u_colors_tex, vec2(col_sample, 0.5)).rgb;
-	
+
 
 	COLOR.rgb = final_col;
 }
@@ -88,7 +100,7 @@ void fragment()
 shader = SubResource( 27 )
 shader_param/u_bitttt_depth = 32
 shader_param/u_contrast = 1.0
-shader_param/u_offsettt = null
+shader_param/u_offsettt = 0.0
 shader_param/u_dither_sizee = 1
 shader_param/u_dither_tex = ExtResource( 7 )
 shader_param/u_colors_tex = ExtResource( 8 )
@@ -129,57 +141,21 @@ shader = SubResource( 8 )
 material = SubResource( 7 )
 size = Vector2( 2, 2 )
 
-[sub_resource type="DynamicFont" id=15]
-size = 10
+[sub_resource type="DynamicFont" id=32]
+size = 20
 font_data = ExtResource( 6 )
 
-[sub_resource type="SpatialMaterial" id=16]
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="TextMesh" id=14]
-material = SubResource( 16 )
-text = "FPS:"
-font = SubResource( 15 )
-depth = 0.0
-
-[sub_resource type="DynamicFont" id=18]
-size = 10
+[sub_resource type="DynamicFont" id=31]
+size = 20
 font_data = ExtResource( 6 )
 
-[sub_resource type="SpatialMaterial" id=19]
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="TextMesh" id=17]
-material = SubResource( 19 )
-text = "OS :"
-font = SubResource( 18 )
-depth = 0.0
-
-[sub_resource type="DynamicFont" id=21]
-size = 10
+[sub_resource type="DynamicFont" id=30]
+size = 20
 font_data = ExtResource( 6 )
 
-[sub_resource type="SpatialMaterial" id=22]
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="TextMesh" id=20]
-material = SubResource( 22 )
-text = "Gyroscope    :"
-font = SubResource( 21 )
-depth = 0.0
-
-[sub_resource type="DynamicFont" id=24]
-size = 10
+[sub_resource type="DynamicFont" id=29]
+size = 20
 font_data = ExtResource( 6 )
-
-[sub_resource type="SpatialMaterial" id=25]
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="TextMesh" id=23]
-material = SubResource( 25 )
-text = "Accelerometer:"
-font = SubResource( 24 )
-depth = 0.0
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
@@ -189,10 +165,16 @@ material = SubResource( 26 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
-stretch_shrink = 3
+stretch_shrink = 2
+script = ExtResource( 9 )
+ColorsTextures = [ ExtResource( 8 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ]
+
+[node name="Timer_ChangeColorPalette" type="Timer" parent="ViewportContainer"]
+wait_time = 5.0
+autostart = true
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 200, 341 )
+size = Vector2( 300, 512 )
 handle_input_locally = false
 hdr = false
 render_target_update_mode = 3
@@ -209,50 +191,72 @@ directional_shadow_mode = 0
 [node name="Cop" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -45 )
 
-[node name="CameraPivot" type="Spatial" parent="ViewportContainer/Viewport/Cop"]
+[node name="PivotFPS" type="Spatial" parent="ViewportContainer/Viewport/Cop"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1, 0 )
 script = ExtResource( 3 )
 
-[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Cop/CameraPivot"]
-transform = Transform( -1, -2.99004e-08, 8.21506e-08, 0, 0.939693, 0.34202, -8.74228e-08, 0.34202, -0.939693, 0, 0, 0 )
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/Cop/PivotFPS"]
+transform = Transform( -1, 2.99004e-08, -8.21506e-08, 0, 0.939693, 0.34202, 8.74228e-08, 0.34202, -0.939693, 0, 0, 0 )
 
-[node name="Len" type="MeshInstance" parent="ViewportContainer/Viewport/Cop/CameraPivot/Camera"]
+[node name="Len" type="MeshInstance" parent="ViewportContainer/Viewport/Cop/PivotFPS/Camera"]
 transform = Transform( 1, -3.55271e-15, 7.10543e-15, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
 visible = false
 mesh = SubResource( 6 )
 
-[node name="SpotLight" type="SpotLight" parent="ViewportContainer/Viewport/Cop/CameraPivot/Camera"]
+[node name="SpotLight" type="SpotLight" parent="ViewportContainer/Viewport/Cop/PivotFPS/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 
-[node name="Camera_Temp" type="Camera" parent="ViewportContainer/Viewport/Cop"]
-transform = Transform( -1, 1.51808e-08, -8.60946e-08, 0, 0.984808, 0.173648, 8.74228e-08, 0.173648, -0.984808, 0, 5, -10 )
+[node name="PivotShoulder" type="Spatial" parent="ViewportContainer/Viewport"]
+script = ExtResource( 16 )
+
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/PivotShoulder"]
+transform = Transform( -1, -1.51808e-08, 8.60946e-08, 0, 0.984808, 0.173648, -8.74228e-08, 0.173648, -0.984808, 0, 5, -6 )
 current = true
 
-[node name="Text" type="Spatial" parent="ViewportContainer/Viewport/Cop/Camera_Temp"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-script = ExtResource( 5 )
-PathMeshFPS = NodePath("FPS")
-PathMeshOS = NodePath("_OS")
-PathMeshGyroscope = NodePath("____Gyroscope")
-PathMeshAccelerometer = NodePath("Accelerometer")
-
-[node name="FPS" type="MeshInstance" parent="ViewportContainer/Viewport/Cop/Camera_Temp/Text"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-mesh = SubResource( 14 )
-
-[node name="_OS" type="MeshInstance" parent="ViewportContainer/Viewport/Cop/Camera_Temp/Text"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
-mesh = SubResource( 17 )
-
-[node name="____Gyroscope" type="MeshInstance" parent="ViewportContainer/Viewport/Cop/Camera_Temp/Text"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0 )
-mesh = SubResource( 20 )
-
-[node name="Accelerometer" type="MeshInstance" parent="ViewportContainer/Viewport/Cop/Camera_Temp/Text"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
-mesh = SubResource( 23 )
-
-[node name="Camera" type="Camera" parent="ViewportContainer/Viewport"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 1, 0 )
-
 [node name="Level$" parent="ViewportContainer/Viewport" instance=ExtResource( 4 )]
+PivotPath = NodePath("../PivotShoulder")
+
+[node name="Text" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+PathRichTextLabelFPS = NodePath("FPS")
+PathRichTextLabelOS = NodePath("_OS")
+PathRichTextLabelGyroscope = NodePath("____Gyroscope")
+PathRichTextLabelAccelerometer = NodePath("Accelerometer")
+
+[node name="FPS" type="RichTextLabel" parent="Text"]
+anchor_right = 1.0
+margin_top = 30.0
+margin_bottom = 60.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 32 )
+text = "@FPS:"
+scroll_active = false
+
+[node name="_OS" type="RichTextLabel" parent="Text"]
+anchor_right = 1.0
+margin_top = 60.0
+margin_bottom = 90.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 31 )
+text = "@OS:"
+scroll_active = false
+
+[node name="____Gyroscope" type="RichTextLabel" parent="Text"]
+anchor_right = 1.0
+margin_top = 90.0
+margin_bottom = 120.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 30 )
+text = "@Gyroscope:"
+scroll_active = false
+
+[node name="Accelerometer" type="RichTextLabel" parent="Text"]
+anchor_right = 1.0
+margin_top = 120.0
+margin_bottom = 150.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 29 )
+text = "@Accelerometer:"
+scroll_active = false

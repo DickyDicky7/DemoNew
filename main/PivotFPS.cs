@@ -1,6 +1,6 @@
 using Godot;
 
-public class CameraPivot : Spatial
+public class PivotFPS : Spatial
 {
     [Export]
     public float          MaxRotate = 10.00f;

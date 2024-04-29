@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
-[ext_resource path="res://RoadPointVisibilityNotifier.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/road-generator/nodes/road_manager.gd" type="Script" id=4]
 [ext_resource path="res://addons/road-generator/nodes/road_container.gd" type="Script" id=5]
 [ext_resource path="res://addons/road-generator/resources/road_texture.material" type="Material" id=6]
@@ -9,7 +8,6 @@
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 1 )
-RoadPointVisibilityNotifier = ExtResource( 2 )
 
 [node name="RoadManager" type="Spatial" parent="."]
 script = ExtResource( 4 )
